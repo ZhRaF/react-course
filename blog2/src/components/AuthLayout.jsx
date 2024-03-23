@@ -1,19 +1,26 @@
-import  { Children, useEffect,useState } from 'react'
+import  { useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-function Protected({children,authentication=true}) {
+function Protected({children, authentication = true}) {
    const navigate=useNavigate()
-   const status= useSelectore((state)=>state.status)
+   const authStatus = useSelector((state) => state.auth.status )
    const [loader, setLoader] = useState(true)
 
    useEffect(() => {
-    if(authentication && status !== authentication)
+    
+    if(authentication && authStatus !== authentication)
       {navigate('/login')}
-    if(!authentication && status!==authentication )
-      {navigate('/')}
+    if(!authentication && authStatus!==authentication )
+    {
+      navigate("/")
+      console.log("status"+authStatus)
+      console.log(authentication)
+      console.log("staying the same url , status ,auth")
+    }
 
       setLoader(false)
-   }, [authentication,status,navigate])
+   }, [authentication,authStatus,navigate])
    
   return loader ? null  : <>{children}</>
 }
