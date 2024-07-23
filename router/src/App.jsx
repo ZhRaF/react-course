@@ -10,8 +10,10 @@ import FeaturedProducts from './componenets/FeaturedProducts'
 import NewProducts from './componenets/NewProducts'
 import Users from './componenets/Users'
 import UserDetails from './componenets/UserDetails'
-
-
+import Profile from './componenets/Profile'
+import {AuthContextProvider} from './componenets/Auth'
+import Login from './componenets/Login'
+import ProtectedAuth from './componenets/ProtectedAuth'
 
 
 
@@ -20,6 +22,7 @@ function App() {
   return (
     <>
   <Router>
+  <AuthContextProvider>
      <Nav/>
     <Routes>
         <Route path="/" element=
@@ -45,9 +48,17 @@ function App() {
               <Route path=':userId' element={<UserDetails/>}/>
 
         </Route>
-
+        
+        <Route path="/profile" element={
+          <ProtectedAuth> 
+            <Profile/>
+          </ProtectedAuth>}   />
+        <Route path='/login' element={<Login/>}/>
         <Route path="*" element={<h1> page not found </h1>} />
-    </Routes>    
+
+
+    </Routes>
+    </AuthContextProvider>    
   </Router>
     </>
   )

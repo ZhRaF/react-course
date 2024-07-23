@@ -1,5 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from './Auth'
+
 function Nav() {
     const navBarStyle = ({isActive})=>{ 
         // this is destructuring 
@@ -13,6 +15,7 @@ function Nav() {
         //     }
 
     }
+    const auth= useAuth()
   return (
     <nav>
         <NavLink style={navBarStyle} to='/home'> 
@@ -30,6 +33,15 @@ function Nav() {
         <NavLink style={navBarStyle} to='/users'> 
             users
         </NavLink>
+        <NavLink style={navBarStyle} to='/profile'> 
+            profile
+        </NavLink>
+        {
+            !auth.user && <NavLink style={navBarStyle} to='/login'> 
+              login
+             </NavLink>
+        }
+
     </nav>
   )
 }
