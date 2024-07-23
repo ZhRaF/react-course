@@ -27,6 +27,9 @@ function Nav() {
         <NavLink style={navBarStyle} to='/products'> 
             products
         </NavLink>
+        <NavLink style={navBarStyle} to='/users'> 
+            users
+        </NavLink>
     </nav>
   )
 }
